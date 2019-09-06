@@ -9,8 +9,8 @@ from traitlets import Undefined
 class ConfigurableDocumenter(ClassDocumenter):
     """Specialized Documenter subclass for traits with config=True"""
 
-    objtype = 'configurable'
-    directivetype = 'class'
+    objtype = "configurable"
+    directivetype = "class"
 
     def get_object_members(self, want_all):
         """Add traits with .tag(config=True) to members list"""
@@ -29,8 +29,8 @@ class ConfigurableDocumenter(ClassDocumenter):
 
 
 class TraitDocumenter(AttributeDocumenter):
-    objtype = 'trait'
-    directivetype = 'attribute'
+    objtype = "trait"
+    directivetype = "attribute"
     member_order = 1
     priority = 100
 
@@ -41,10 +41,10 @@ class TraitDocumenter(AttributeDocumenter):
     def add_directive_header(self, sig):
         default = self.object.get_default_value()
         if default is Undefined:
-            default_s = ''
+            default_s = ""
         else:
             default_s = repr(default)
-        self.options.annotation = 'c.{name} = {trait}({default})'.format(
+        self.options.annotation = "c.{name} = {trait}({default})".format(
             name=self.format_name(),
             trait=self.object.__class__.__name__,
             default=default_s,
