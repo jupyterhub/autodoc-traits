@@ -1,11 +1,13 @@
 import setuptools
 
+from autodoc_traits import __version__ as version
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="autodoc-traits",
-    version="0.1.0",
+    version=version,
     author="Jupyter Development Team",
     author_email="jupyter@googlegroups.com",
     description="Sphinx extension to autodoc traitlets",
