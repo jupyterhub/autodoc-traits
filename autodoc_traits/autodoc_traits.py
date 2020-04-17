@@ -25,7 +25,13 @@ class ConfigurableDocumenter(ClassDocumenter):
             # put help in __doc__ where autodoc will look for it
             trait.__doc__ = trait.help
             trait_members.append((name, trait))
-        return check, trait_members + members
+        # Remove duplicates between members and trait_members.  We
+        # can't use sets, because not all items are hashable.  Modify
+        # trait_members in place for returning.
+        for item in members:
+            if item not in trait_members:
+                trait_members.append(item)
+        return check, trait_members
 
 
 class TraitDocumenter(AttributeDocumenter):
