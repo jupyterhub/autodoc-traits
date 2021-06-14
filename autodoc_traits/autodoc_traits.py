@@ -1,5 +1,4 @@
 """autodoc extension for configurable traits"""
-from sphinx.domains.python import PyClassmember
 from sphinx.ext.autodoc import AttributeDocumenter
 from sphinx.ext.autodoc import ClassDocumenter
 from traitlets import TraitType
