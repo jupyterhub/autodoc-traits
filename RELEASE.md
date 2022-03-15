@@ -62,7 +62,7 @@ To follow these instructions, you need:
 1. Create a git tag for the pushed release commit and push it.
 
    ```shell
-   git tag -a $VERSION -m $VERSION
+   git tag -a $VERSION -m $VERSION HEAD~1
    # verify you tagged the right commit
    git log
 
