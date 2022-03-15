@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "1.0.0.dev"
 
 
 def setup(app, *args, **kwargs):
