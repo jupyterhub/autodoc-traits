@@ -13,7 +13,7 @@ setuptools.setup(
     description="Sphinx extension to autodoc traitlets",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://jupyter.org",
+    url="https://github.com/jupyterhub/autodoc-traits",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
