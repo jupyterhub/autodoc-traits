@@ -1,43 +1,49 @@
 # How to make a release
 
-`autodoc-traits` is a package [available on
-PyPI][pypi].
-These are instructions on how to make a release on PyPI.
-The PyPI release is done automatically by GitHub Actions when a tag is pushed.
+`autodoc-traits` is a package available on [PyPI][].
+These are instructions on how to make a release.
 
-To follow these instructions, you need:
+## Pre-requisites
 
-- To have push rights to the [autodoc-traits GitHub
-  repository][repo].
-
-[pypi]: https://pypi.org/project/autodoc-traits
-[repo]: https://github.com/jupyterhub/autodoc-traits
+- Push rights to [jupyterhub/autodoc-traits][]
 
 ## Steps to make a release
+
+1. Create a PR updating `CHANGELOG.md` with [github-activity][] and continue
+   only when its merged.
+
+   ```shell
+   pip install github-activity
+
+   github-activity --heading-level=3 jupyterhub/autodoc-traits
+   ```
 
 1. Checkout main and make sure it is up to date.
 
    ```shell
-   ORIGIN=${ORIGIN:-origin} # set to the canonical remote, e.g. 'upstream' if 'origin' is not the official repo
    git checkout main
-   git pull $ORIGIN main
+   git fetch origin main
+   git reset --hard origin/main
    ```
 
-1. Update [CHANGELOG.md](CHANGELOG.md). Doing this can be made easier with the
-   help of the
-   [choldgraf/github-activity](https://github.com/choldgraf/github-activity)
-   utility.
+1. Update the version, make commits, and push a git tag with `tbump`.
 
-1. Publish the new version with [tbump][]
+   ```shell
+   pip install tbump
+   tbump --dry-run ${VERSION}
 
-   ```
-   tbump 1.2.3
+   tbump ${VERSION}
    ```
 
-1. Reset the version to next.dev (e.g. 1.2.3 -> 1.3.0.dev)
+   Following this, the [CI system][] will build and publish a release.
 
-   ```
-   tbump --no-tag 1.3.0.dev
+1. Reset the version back to dev, e.g. `2.1.0.dev` after releasing `2.0.0`
+
+   ```shell
+   tbump --no-tag ${NEXT_VERSION}.dev
    ```
 
-[tbump]: https://github.com/dmerejkowsky/tbump
+[pypi]: https://pypi.org/project/jupyterhub/
+[jupyterhub/autodoc-traits]: https://github.com/jupyterhub/autodoc-traits
+[github-activity]: https://github.com/executablebooks/github-activity
+[ci system]: https://github.com/jupyterhub/autodoc-traits/actions/workflows/publish.yml

@@ -1,17 +1,19 @@
 # Changes in autodoc-traits
 
-## 0.1.0
+## 0.1
+
+### 0.1.0 - 2021-10-22
 
 0.1.0 is the first stable release of autodoc-traits.
 It fixes compatibility with sphinx 4 from the previously published 0.1.0dev prerelease.
 
-### Merged PRs
+#### Merged PRs
 
 - add publish github action [#4](https://github.com/jupyterhub/autodoc-traits/pull/4) ([@minrk](https://github.com/minrk))
 - Remove unused import of deprecated PyClassmember [#3](https://github.com/jupyterhub/autodoc-traits/pull/3) ([@minrk](https://github.com/minrk))
 - Remove duplicates in documenting trait members [#1](https://github.com/jupyterhub/autodoc-traits/pull/1) ([@rkdarst](https://github.com/rkdarst))
 
-### Contributors to this release
+#### Contributors to this release
 
 ([GitHub contributors page for this release](https://github.com/jupyterhub/autodoc-traits/graphs/contributors?from=2019-09-06&to=2021-10-22&type=c))
 
