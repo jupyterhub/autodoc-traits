@@ -44,7 +44,6 @@ The extension also provides the `autoconfigurable` directive mapping to the
 3. Make use of a `sphinx.ext.autodoc` Sphinx directive like `autoclass`, or
    `automodule` that make use of `autoclass`:
 
-
    From a .rst document:
 
    ```rst
@@ -53,25 +52,25 @@ The extension also provides the `autoconfigurable` directive mapping to the
 
 ## Use with MyST Parser
 
-   While you can use [`myst-parser`][], `sphinx.ext.autodoc`'s directives emits
-   unparsed rST, forcing us to parse the autodoc directives in a rST context.
+While you can use [`myst-parser`][], `sphinx.ext.autodoc`'s directives emits
+unparsed rST, forcing us to parse the autodoc directives in a rST context.
 
-   From a .md document, with `myst-parser`:
+From a .md document, with `myst-parser`:
 
-   ````markdown
-   ```{eval-rst}
-   .. autoclass:: KubeSpawner
-   ```
-   ````
+````markdown
+```{eval-rst}
+.. autoclass:: KubeSpawner
+```
+````
 
-  Due to this, also the Python docstrings are required to be in rST as well.
-  Addressing this can be tracked from [executablebooks/team-compass issue
-  #6](https://github.com/executablebooks/team-compass/issues/6).
+Due to this, also the Python docstrings are required to be in rST as well.
+Addressing this can be tracked from [executablebooks/team-compass issue
+#6](https://github.com/executablebooks/team-compass/issues/6).
 
 [`sphinx.ext.autodoc`]: https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html
 [sphinx directives]: https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#directives
 [`autoclass`]: https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#directive-autoclass
 [`autoattribute`]: https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#directive-autoattribute
 [traitlets]: https://github.com/ipython/traitlets
-[`traitlets.TraitType`]: https://traitlets.readthedocs.io/en/stable/trait_types.html#traitlets.TraitType
+[`traitlets.traittype`]: https://traitlets.readthedocs.io/en/stable/trait_types.html#traitlets.TraitType
 [`myst-parser`]: https://myst-parser.readthedocs.io/en/latest/
