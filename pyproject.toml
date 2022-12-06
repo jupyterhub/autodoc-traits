@@ -40,7 +40,7 @@ target_version = [
 # ref: https://github.com/your-tools/tbump#readme
 #
 [tool.tbump.version]
-current = "1.0.0.dev"
+current = "1.0.0"
 
 # Example of a pep440 regexp.
 # Make sure this matches current_version before
