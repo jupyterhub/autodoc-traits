@@ -19,7 +19,19 @@ class ConfigurableDocumenter(ClassDocumenter):
         check, members = super().get_object_members(want_all)
         if not isinstance(self.object, MetaHasTraits):
             return check, members
+        # The directive can have been passed a inherited-members option to
+        # influence it, and we rely on two traitlets provided functions for it.
+        #
+        # class_own_traits returns the class own defined traits, while
+        # class_traits includes super classes' defined traits.
+        #
+        # class_traits definition:     https://github.com/ipython/traitlets/blob/v5.6.0/traitlets/traitlets.py#L1620-L1652
+        # class_own_traits definition: https://github.com/ipython/traitlets/blob/v5.6.0/traitlets/traitlets.py#L1654-L1665
+        #
         get_traits = (
+            # FIXME: Is this backwards?
+            #        Tracked in https://github.com/jupyterhub/autodoc-traits/issues/19
+            #
             self.object.class_own_traits
             if self.options.inherited_members
             else self.object.class_traits
