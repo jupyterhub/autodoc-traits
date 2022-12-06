@@ -1,9 +1,6 @@
 """autodoc extension for configurable traits"""
-from sphinx.ext.autodoc import AttributeDocumenter
-from sphinx.ext.autodoc import ClassDocumenter
-from traitlets import MetaHasTraits
-from traitlets import TraitType
-from traitlets import Undefined
+from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
+from traitlets import MetaHasTraits, TraitType, Undefined
 
 
 class ConfigurableDocumenter(ClassDocumenter):
