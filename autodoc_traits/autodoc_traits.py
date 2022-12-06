@@ -1,4 +1,9 @@
-"""autodoc extension for configurable traits"""
+"""
+sphinx.ext.autodoc extension for classes with configurable traits.
+
+The code here is similar to the official code example in
+https://www.sphinx-doc.org/en/master/development/tutorials/autodoc_ext.html#writing-the-extension.
+"""
 from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
 from traitlets import MetaHasTraits, TraitType, Undefined
 
@@ -58,5 +63,18 @@ class TraitDocumenter(AttributeDocumenter):
 
 
 def setup(app):
+    """
+    The setup function is required for Sphinx extensions.
+
+    In this function we register the sphinx.ext.autodoc extension that this
+    extension needs to function, and we register our sphinx.ext.autodoc
+    Documenter classes we provide.
+    """
+    # setup_extension reference:
+    # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.setup_extension
+    app.setup_extension("sphinx.ext.autodoc")
+
+    # add_autodocumenter reference:
+    # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_autodocumenter
     app.add_autodocumenter(ConfigurableDocumenter)
     app.add_autodocumenter(TraitDocumenter)

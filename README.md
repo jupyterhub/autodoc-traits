@@ -27,8 +27,8 @@ The extension also provides the `autoconfigurable` directive mapping to the
    pip install autodoc-traits
    ```
 
-2. Configure Sphinx to use the `autodoc_traits` and `sphinx.ext.autodoc`
-   extensions in a Sphinx projects `conf.py` file:
+2. Configure Sphinx to use the `autodoc_traits` extensions in a Sphinx project's
+   `conf.py` file:
 
    ```python
    # -- General Sphinx configuration --------------------------------------------
@@ -36,7 +36,8 @@ The extension also provides the `autoconfigurable` directive mapping to the
    #
    extensions = [
        "autodoc_traits",
-       "sphinx.ext.autodoc",
+       # sphinx.ext.autodoc will be registered by autodoc_traits,
+       # but can safely be registered again.
        # ...
    ]
    ```
