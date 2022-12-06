@@ -54,7 +54,7 @@ regex = '''
   (?P<pre>((a|b|rc)\d+)|)
   \.?
   (?P<dev>(?<=\.)dev\d*|)
-  '''
+'''
 
 [tool.tbump.git]
 message_template = "Bump to {new_version}"
@@ -64,4 +64,4 @@ tag_template = "{new_version}"
 # section containing the path of the file, relative to the
 # tbump.toml location.
 [[tool.tbump.file]]
-src = "autodoc_traits/__init__.py"
+src = "autodoc_traits/_version.py"
