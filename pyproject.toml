@@ -6,7 +6,7 @@
 name = "autodoc-traits"
 description = "Sphinx extension to autodoc traitlets"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.7"
 license = {file = "LICENSE"}
 keywords = ["repo2docker", "jupyterhub"]
 authors = [
@@ -73,7 +73,6 @@ skip-string-normalization = true
 # target-version should be all supported versions, see
 # https://github.com/psf/black/issues/751#issuecomment-473066811
 target_version = [
-    "py36",
     "py37",
     "py38",
     "py39",
