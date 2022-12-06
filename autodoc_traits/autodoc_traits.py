@@ -1,6 +1,6 @@
 """autodoc extension for configurable traits"""
 from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
-from traitlets import TraitType, Undefined
+from traitlets import MetaHasTraits, TraitType, Undefined
 
 
 class ConfigurableDocumenter(ClassDocumenter):
@@ -12,6 +12,8 @@ class ConfigurableDocumenter(ClassDocumenter):
     def get_object_members(self, want_all):
         """Add traits with .tag(config=True) to members list"""
         check, members = super().get_object_members(want_all)
+        if not isinstance(self.object, MetaHasTraits):
+            return check, members
         get_traits = (
             self.object.class_own_traits
             if self.options.inherited_members
