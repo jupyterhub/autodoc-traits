@@ -1,3 +1,51 @@
+# project
+# - ref 1: https://peps.python.org/pep-0621/
+# - ref 2: https://hatch.pypa.io/latest/config/metadata/#project-metadata
+#
+[project]
+name = "autodoc-traits"
+description = "Sphinx extension to autodoc traitlets"
+readme = "README.md"
+requires-python = ">=3.6"
+license = {file = "LICENSE"}
+keywords = ["repo2docker", "jupyterhub"]
+authors = [
+    {name = "Jupyter Development Team", email = "jupyter@googlegroups.com"},
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "sphinx",
+    "traitlets",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[project.urls]
+Documentation = "https://github.com/jupyterhub/autodoc-traits#readme"
+Issues = "https://github.com/jupyterhub/autodoc-traits/issues"
+Source = "https://github.com/jupyterhub/autodoc-traits"
+
+
+# build-system
+# - ref 1: https://peps.python.org/pep-0517/
+#
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# hatch ref: https://hatch.pypa.io/latest/
+#
+[tool.hatch.version]
+path = "autodoc_traits/_version.py"
+
 # autoflake is used for autoformatting Python code
 #
 # ref: https://github.com/PyCQA/autoflake#readme
