@@ -44,7 +44,7 @@ build-backend = "hatchling.build"
 # hatch ref: https://hatch.pypa.io/latest/
 #
 [tool.hatch.version]
-path = "autodoc_traits/_version.py"
+path = "autodoc_traits.py"
 
 # autoflake is used for autoformatting Python code
 #
@@ -111,4 +111,4 @@ tag_template = "{new_version}"
 # section containing the path of the file, relative to the
 # tbump.toml location.
 [[tool.tbump.file]]
-src = "autodoc_traits/_version.py"
+src = "autodoc_traits.py"

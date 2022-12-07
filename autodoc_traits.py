@@ -7,6 +7,11 @@ https://www.sphinx-doc.org/en/master/development/tutorials/autodoc_ext.html#writ
 from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
 from traitlets import MetaHasTraits, TraitType, Undefined
 
+# __version__ should be updated using tbump, based on configuration in
+# pyproject.toml, according to instructions in RELEASE.md.
+#
+__version__ = "1.0.0"
+
 
 class ConfigurableDocumenter(ClassDocumenter):
     """Specialized Documenter subclass for traits with config=True"""
