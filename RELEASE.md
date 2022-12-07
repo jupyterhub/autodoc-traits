@@ -46,4 +46,4 @@ These are instructions on how to make a release.
 [pypi]: https://pypi.org/project/jupyterhub/
 [jupyterhub/autodoc-traits]: https://github.com/jupyterhub/autodoc-traits
 [github-activity]: https://github.com/executablebooks/github-activity
-[ci system]: https://github.com/jupyterhub/autodoc-traits/actions/workflows/publish.yml
+[ci system]: https://github.com/jupyterhub/autodoc-traits/actions/workflows/release.yaml
