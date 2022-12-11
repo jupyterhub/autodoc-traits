@@ -1,0 +1,61 @@
+# This is a GitHub workflow defining a set of jobs with a set of steps.
+# ref: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+#
+name: Test
+
+on:
+  pull_request:
+    paths-ignore:
+      - "**.md"
+      - ".github/workflows/*"
+      - "!.github/workflows/test.yaml"
+  push:
+    paths-ignore:
+      - "**.md"
+      - ".github/workflows/*"
+      - "!.github/workflows/test.yaml"
+    branches-ignore:
+      - "dependabot/**"
+      - "pre-commit-ci-update-config"
+    tags:
+      - "**"
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # NOTE: jinja2<3.1 is added as a workaround to ensure we can test
+          #       against sphinx 2 and 3 that otherwise breaks, see
+          #       https://github.com/sphinx-doc/sphinx/issues/10291#issuecomment-1079709635.
+          #
+          - python-version: "3.8"
+            sphinx-version: "2.*"
+            traitlets-version: "4.*"
+            pip-install-addition: "'jinja2<3.1'"
+          - python-version: "3.9"
+            sphinx-version: "3.*"
+            traitlets-version: "4.*"
+            pip-install-addition: "'jinja2<3.1'"
+          - python-version: "3.10"
+            sphinx-version: "4.*"
+            traitlets-version: "5.*"
+            pip-install-addition: ""
+          - python-version: "3.11"
+            sphinx-version: "5.*"
+            traitlets-version: "5.*"
+            pip-install-addition: ""
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "${{ matrix.python-version }}"
+
+      - run: pip install ".[test]" "sphinx==${{ matrix.sphinx-version }}" "traitlets==${{ matrix.traitlets-version }}" ${{ matrix.pip-install-addition }}
+
+      - run: pytest
