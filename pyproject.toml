@@ -5,10 +5,7 @@
 [project]
 name = "autodoc-traits"
 description = "Sphinx extension to autodoc traitlets"
-readme = "README.md"
-requires-python = ">=3.7"
-license = {file = "LICENSE"}
-keywords = ["repo2docker", "jupyterhub"]
+keywords = ["sphinx", "extension", "autodoc", "traitlets"]
 authors = [
     {name = "Jupyter Development Team", email = "jupyter@googlegroups.com"},
 ]
@@ -17,11 +14,14 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
 ]
-dependencies = [
-    "sphinx",
-    "traitlets",
-]
+readme = "README.md"
+license = {file = "LICENSE"}
 dynamic = ["version"]
+requires-python = ">=3.7"
+dependencies = [
+    "sphinx>=2",
+    "traitlets>=4",
+]
 
 [project.optional-dependencies]
 test = [
@@ -46,6 +46,7 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "autodoc_traits.py"
 
+
 # autoflake is used for autoformatting Python code
 #
 # ref: https://github.com/PyCQA/autoflake#readme
@@ -55,6 +56,7 @@ ignore-init-module-imports = true
 remove-all-unused-imports = true
 remove-duplicate-keys = true
 #remove-unused-variables = true
+
 
 # isort is used for autoformatting Python code
 #
