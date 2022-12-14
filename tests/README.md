@@ -24,7 +24,6 @@ sphinx-autobuild \
     --watch="test_module.py" \
     --watch="../../autodoc_traits.py" \
     --pre-build="rm -rf build" \
-    --ignore
     source \
     build
 ```
