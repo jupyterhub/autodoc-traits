@@ -20,12 +20,27 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
 @pytest.mark.parametrize(
     "rst_file_to_test, strings_in_html, strings_not_in_html",
     [
-        ("autoclass/members.rst", [], ["c.SampleConfigurable.trait"]),
-        ("autoclass/undoc_members.rst", ["c.SampleConfigurable.trait"], []),
+        (
+            "autoclass/members.rst",
+            [],
+            [
+                "c.SampleConfigurable.trait",
+            ],
+        ),
+        (
+            "autoclass/undoc_members.rst",
+            [
+                "c.SampleConfigurable.trait",
+            ],
+            [],
+        ),
         (
             "autoconfigurable/exclude_members.rst",
             ["c.SampleConfigurable.trait_nohelp"],
-            ["trait help text", "method docstring"],
+            [
+                "trait help text",
+                "method docstring",
+            ],
         ),
         (
             "autoconfigurable/inherited_members.rst",
@@ -38,18 +53,34 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
         ),
         (
             "autoconfigurable/members.rst",
-            ["trait help text", "method docstring"],
-            ["trait_noconfig help text"],
+            [
+                "c.SampleConfigurableSubclass.subclass_trait",
+                "c.SampleConfigurableSubclass.trait",
+                "method docstring",
+            ],
+            [
+                "trait_noconfig help text",
+            ],
         ),
         (
             "autoconfigurable/no_members.rst",
-            ["trait help text"],
-            ["trait_noconfig help text", "method docstring"],
+            [
+                "c.SampleConfigurableSubclass.subclass_trait",
+                "c.SampleConfigurableSubclass.trait",
+            ],
+            [
+                "trait_noconfig help text",
+                "method docstring",
+            ],
         ),
         ("autoconfigurable/non_configurable_raises_error.rst", [], []),
         (
             "autoconfigurable/specified_members.rst",
-            ["method docstring", "c.SampleConfigurable.trait_nohelp", "trait help text"],
+            [
+                "method docstring",
+                "c.SampleConfigurable.trait_nohelp",
+                "trait help text",
+            ],
             [],
         ),
         (
@@ -63,9 +94,28 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
             ],
             [],
         ),
-        ("autotrait/help.rst", ["c.SampleConfigurable.trait", "trait help text"], []),
-        ("autotrait/noconfig.rst", ["c.SampleConfigurable.trait_noconfig"], []),
-        ("autotrait/nohelp.rst", ["c.SampleConfigurable.trait_nohelp"], []),
+        (
+            "autotrait/help.rst",
+            [
+                "c.SampleConfigurable.trait",
+                "trait help text",
+            ],
+            [],
+        ),
+        (
+            "autotrait/noconfig.rst",
+            [
+                "c.SampleConfigurable.trait_noconfig",
+            ],
+            [],
+        ),
+        (
+            "autotrait/nohelp.rst",
+            [
+                "c.SampleConfigurable.trait_nohelp",
+            ],
+            [],
+        ),
         ("autotrait/non_trait_raises_error.rst", [], []),
     ],
 )
