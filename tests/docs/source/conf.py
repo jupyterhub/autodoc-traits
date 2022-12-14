@@ -4,8 +4,9 @@ import sys
 project = "autodoc_traits tests"
 extensions = [
     "autodoc_traits",
-    # sphinx.ext.napoleon is added to avoid warnings if testing with :inherited-members:`
-    # where the traitlets base classes members has numpy or google-format docstrings
+    # sphinx.ext.napoleon is added to avoid warnings if testing with
+    # :inherited-members:` where the super classe traitlets.HasTraits has numpy
+    # or google-format docstrings that the napoleon can help interpret.
     "sphinx.ext.napoleon",
 ]
 
