@@ -6,5 +6,5 @@ present them all still, see `Issue27`_.
 
 .. _Issue27: https://github.com/jupyterhub/autodoc-traits/issues/27
 
-.. autoconfigurable:: test_module.TestConfigurable
+.. autoconfigurable:: sample_module.SampleConfigurable
    :noindex:

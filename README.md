@@ -18,7 +18,7 @@ classes, will with `autodoc-traits` enabled use `autoconfigurable` over
 not presented.
 
 The `autoattribute` directive will provide a header looking like `trait
-c.TestConfigurable.trait = Bool(False)`, and as docstring it will use the
+c.SampleConfigurable.trait = Bool(False)`, and as docstring it will use the
 trait's configured help text.
 
 ## How to use it
@@ -52,12 +52,12 @@ trait's configured help text.
    From a .rst document:
 
    ```rst
-   .. automodule:: test_module
+   .. automodule:: sample_module
       :members:
 
-   .. autoconfigurable:: test_module.TestConfigurable
+   .. autoconfigurable:: sample_module.SampleConfigurable
 
-   .. autotrait:: test_module.TestConfigurable.trait
+   .. autotrait:: sample_module.SampleConfigurable.trait
    ```
 
 ## Use with MyST Parser
@@ -69,7 +69,7 @@ From a .md document, with `myst-parser`:
 
 ````markdown
 ```{eval-rst}
-.. autoconfigurable:: test_module.TestConfigurable
+.. autoconfigurable:: sample_module.SampleConfigurable
 ```
 ````
 

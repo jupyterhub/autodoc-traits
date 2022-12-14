@@ -9,7 +9,7 @@ extensions = [
     "sphinx.ext.napoleon",
 ]
 
-# ensure test_module.py is on path
+# ensure sample_module.py is on path
 tests_dir = os.path.join(os.path.dirname(__file__), "..")
 tests_dir = os.path.abspath(tests_dir)
 sys.path.insert(0, tests_dir)

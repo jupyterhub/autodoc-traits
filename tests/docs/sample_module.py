@@ -1,5 +1,5 @@
 """
-test_module docstring
+sample_module docstring
 
 This module provides a module and classes with and without traits to test
 autodoc_traits against. It does not contain tests.
@@ -9,8 +9,8 @@ from traitlets import Bool
 from traitlets.config.configurable import Configurable
 
 
-class TestConfigurable(Configurable):
-    """TestConfigurable docstring"""
+class SampleConfigurable(Configurable):
+    """SampleConfigurable docstring"""
 
     non_trait = False
 
@@ -33,8 +33,8 @@ class TestConfigurable(Configurable):
         """method docstring"""
 
 
-class TestConfigurableSubclass(TestConfigurable):
-    """TestConfigurableSubclass docstring"""
+class SampleConfigurableSubclass(SampleConfigurable):
+    """SampleConfigurableSubclass docstring"""
 
     subclass_non_trait = False
 
@@ -57,8 +57,8 @@ class TestConfigurableSubclass(TestConfigurable):
         """subclass_method docstring"""
 
 
-class TestNonConfigurable:
-    """TestNonConfigurable docstring"""
+class SampleNonConfigurable:
+    """SampleNonConfigurable docstring"""
 
     non_trait = False
 
@@ -70,8 +70,8 @@ class TestNonConfigurable:
         """method docstring"""
 
 
-class TestNonConfigurableSubclass(TestNonConfigurable):
-    """TestNonConfigurableSubclass docstring"""
+class SampleNonConfigurableSubclass(SampleNonConfigurable):
+    """SampleNonConfigurableSubclass docstring"""
 
     non_trait = False
 

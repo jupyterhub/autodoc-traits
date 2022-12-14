@@ -8,7 +8,7 @@ In this test we provide ``members`` and then exclude the members ``trait``
 and ``method`` by specifying them with ``exclude-members`` that otherwise ought
 to show up, and check that they aren't showing up.
 
-.. autoconfigurable:: test_module.TestConfigurable
+.. autoconfigurable:: sample_module.SampleConfigurable
    :noindex:
    :members:
    :exclude-members: trait,method

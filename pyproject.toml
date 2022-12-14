@@ -88,7 +88,7 @@ target_version = [
 # ref: https://docs.pytest.org/en/stable/
 #
 [tool.pytest.ini_options]
-addopts = "--verbose --color=yes --durations=10 --ignore=tests/docs/test_module.py"
+addopts = "--verbose --color=yes --durations=10 --ignore=tests/docs/sample_module.py"
 
 
 # tbump is used to simplify and standardize the release process when updating

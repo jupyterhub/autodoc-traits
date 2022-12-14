@@ -20,18 +20,18 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
 @pytest.mark.parametrize(
     "rst_file_to_test, strings_in_html, strings_not_in_html",
     [
-        ("autoclass/members.rst", [], ["c.TestConfigurable.trait"]),
-        ("autoclass/undoc_members.rst", ["c.TestConfigurable.trait"], []),
+        ("autoclass/members.rst", [], ["c.SampleConfigurable.trait"]),
+        ("autoclass/undoc_members.rst", ["c.SampleConfigurable.trait"], []),
         (
             "autoconfigurable/exclude_members.rst",
-            ["c.TestConfigurable.trait_nohelp"],
+            ["c.SampleConfigurable.trait_nohelp"],
             ["trait help text", "method docstring"],
         ),
         (
             "autoconfigurable/inherited_members.rst",
             [
-                "c.TestConfigurableSubclass.trait",
-                "c.TestConfigurableSubclass.subclass_trait",
+                "c.SampleConfigurableSubclass.trait",
+                "c.SampleConfigurableSubclass.subclass_trait",
                 "method docstring",
             ],
             [],
@@ -49,23 +49,23 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
         ("autoconfigurable/non_configurable_raises_error.rst", [], []),
         (
             "autoconfigurable/specified_members.rst",
-            ["method docstring", "c.TestConfigurable.trait_nohelp", "trait help text"],
+            ["method docstring", "c.SampleConfigurable.trait_nohelp", "trait help text"],
             [],
         ),
         (
             "automodule/members.rst",
             [
-                "test_module docstring",
-                "TestConfigurable docstring",
-                "TestConfigurableSubclass docstring",
-                "TestNonConfigurable docstring",
-                "TestNonConfigurableSubclass docstring",
+                "sample_module docstring",
+                "SampleConfigurable docstring",
+                "SampleConfigurableSubclass docstring",
+                "SampleNonConfigurable docstring",
+                "SampleNonConfigurableSubclass docstring",
             ],
             [],
         ),
-        ("autotrait/help.rst", ["c.TestConfigurable.trait", "trait help text"], []),
-        ("autotrait/noconfig.rst", ["c.TestConfigurable.trait_noconfig"], []),
-        ("autotrait/nohelp.rst", ["c.TestConfigurable.trait_nohelp"], []),
+        ("autotrait/help.rst", ["c.SampleConfigurable.trait", "trait help text"], []),
+        ("autotrait/noconfig.rst", ["c.SampleConfigurable.trait_noconfig"], []),
+        ("autotrait/nohelp.rst", ["c.SampleConfigurable.trait_nohelp"], []),
         ("autotrait/non_trait_raises_error.rst", [], []),
     ],
 )

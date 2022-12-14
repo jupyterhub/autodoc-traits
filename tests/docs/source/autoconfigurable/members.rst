@@ -6,6 +6,6 @@ members.
 
 In this test expect all trait members to show up.
 
-.. autoconfigurable:: test_module.TestConfigurable
+.. autoconfigurable:: sample_module.SampleConfigurable
    :noindex:
    :members:
