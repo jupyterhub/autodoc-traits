@@ -6,7 +6,7 @@ extensions = [
     "autodoc_traits",
     # sphinx.ext.napoleon is added to avoid warnings if testing with :inherited-members:`
     # where the traitlets base classes members has numpy or google-format docstrings
-    "sphinx.ext.napoleon"
+    "sphinx.ext.napoleon",
 ]
 
 # ensure test_module.py is on path
