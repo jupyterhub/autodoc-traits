@@ -2,7 +2,12 @@ import os
 import sys
 
 project = "autodoc_traits tests"
-extensions = ["autodoc_traits"]
+extensions = [
+    "autodoc_traits",
+    # sphinx.ext.napoleon is added to avoid warnings if testing with :inherited-members:`
+    # where the traitlets base classes members has numpy or google-format docstrings
+    "sphinx.ext.napoleon"
+]
 
 # ensure test_module.py is on path
 tests_dir = os.path.join(os.path.dirname(__file__), "..")
