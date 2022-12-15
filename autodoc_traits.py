@@ -165,7 +165,7 @@ class TraitDocumenter(AttributeDocumenter):
         else:
             default_value = repr(default_value)
 
-        traitlets_type = traitlets_type = self.object.__class__.__name__  # Bool
+        traitlets_type = self.object.__class__.__name__  # Bool
 
         if self.object.metadata.get("config"):
             # add config prefix (c.TestConfigurator.trait = ) if it's configurable
