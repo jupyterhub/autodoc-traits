@@ -105,9 +105,11 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
         (
             "autotrait/noconfig.rst",
             [
+                "Bool(False)",
+            ],
+            [
                 "c.SampleConfigurable.trait_noconfig",
             ],
-            [],
         ),
         (
             "autotrait/nohelp.rst",

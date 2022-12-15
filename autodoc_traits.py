@@ -165,11 +165,15 @@ class TraitDocumenter(AttributeDocumenter):
         else:
             default_value = repr(default_value)
 
-        self.options.annotation = "c.{name} = {traitlets_type}({default_value})".format(
-            name=self.format_name(),  # TestConfigurator.trait
-            traitlets_type=self.object.__class__.__name__,  # Bool
-            default_value=default_value,
-        )
+        traitlets_type = traitlets_type = self.object.__class__.__name__  # Bool
+
+        if self.object.metadata.get("config"):
+            # add config prefix (c.TestConfigurator.trait = ) if it's configurable
+            config_prefix = f"c.{self.format_name()} = "
+        else:
+            config_prefix = ""
+
+        self.options.annotation = f"{config_prefix}{traitlets_type}({default_value})"
 
         super().add_directive_header(sig)
 
