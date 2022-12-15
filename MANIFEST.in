@@ -1,5 +1,5 @@
 include MANIFEST.in
-recursive-include autodoc_traits *
+include autodoc_traits.py
 include LICENSE
 include *.md
 

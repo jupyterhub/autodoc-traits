@@ -5,19 +5,21 @@
 [![Discourse](https://img.shields.io/badge/help_forum-discourse-blue?logo=discourse)](https://discourse.jupyter.org/c/jupyterhub)
 [![Gitter](https://img.shields.io/badge/social_chat-gitter-blue?logo=gitter)](https://gitter.im/jupyterhub/jupyterhub)
 
-`autodoc-traits` is a Sphinx extension that influences
-[`sphinx.ext.autodoc`][]'s provided [Sphinx directives][], specifically
-[`autoclass`][] and [`autoattribute`][], to better document classes with
-[Traitlets][] based configuration.
+`autodoc-traits` is a Sphinx extension that builds on [`sphinx.ext.autodoc`][]
+to better document classes with [Traitlets][] based configuration.
+`autodoc-traits` provides the [Sphinx directives][] `autoconfigurable` (use with
+classes) and `autotrait` (use with the traitlets based configuration options).
 
-The `autoclass` directive is updated to document class attributes inheriting
-from [`traitlets.TraitType`][] by default. The `autoattribute` directive is
-updated to provide a header looking like `default_url c.KubeSpawner.default_url
-= Unicode('')`.
+The `sphinx.ext.autodoc` provided directive [`automodule`][], which can overview
+classes, will with `autodoc-traits` enabled use `autoconfigurable` over
+[`autoclass`][] for classes has trait based configuration. Similarly, the
+`sphinx.ext.autodoc` provided `autoclass` directive will use `autotrait` over
+[`autoattribute`][] if configured to present the traitlets attributes normally
+not presented.
 
-The extension also provides the `autoconfigurable` directive mapping to the
-`autoclass` directive, and the `autotrait` directive mapping to the
-`autoattributes` directive.
+The `autoattribute` directive will provide a header looking like `trait
+c.SampleConfigurable.trait = Bool(False)`, and as docstring it will use the
+trait's configured help text.
 
 ## How to use it
 
@@ -42,13 +44,20 @@ The extension also provides the `autoconfigurable` directive mapping to the
    ]
    ```
 
-3. Make use of a `sphinx.ext.autodoc` Sphinx directive like `autoclass`, or
-   `automodule` that make use of `autoclass`:
+3. Make use of the `sphinx.ext.autodoc` Sphinx directive like `automodule` that
+   document classes, the `autodoc_traits` provided `autoconfigurable` that
+   documents traitlets configurable classes, or the `autodoc_traits` provided
+   `autotrait` that documents individual traitlets configuration options:
 
    From a .rst document:
 
    ```rst
-   .. autoclass:: KubeSpawner
+   .. automodule:: sample_module
+      :members:
+
+   .. autoconfigurable:: sample_module.SampleConfigurable
+
+   .. autotrait:: sample_module.SampleConfigurable.trait
    ```
 
 ## Use with MyST Parser
@@ -60,7 +69,7 @@ From a .md document, with `myst-parser`:
 
 ````markdown
 ```{eval-rst}
-.. autoclass:: KubeSpawner
+.. autoconfigurable:: sample_module.SampleConfigurable
 ```
 ````
 
