@@ -2,6 +2,41 @@
 
 ## 1.0
 
+### 1.1.0 - 2022-12-15
+
+([full changelog](https://github.com/jupyterhub/autodoc-traits/compare/1.0.0...1.1.0))
+
+#### Enhancements made
+
+- Automatically register the sphinx.ext.autodoc extension [#18](https://github.com/jupyterhub/autodoc-traits/pull/18) ([@consideRatio](https://github.com/consideRatio))
+
+#### Bugs fixed
+
+- avoid putting `c.Class.trait` annotation on non-config traits [#32](https://github.com/jupyterhub/autodoc-traits/pull/32) ([@minrk](https://github.com/minrk))
+- Add tests, add docstrings, and fix small bugs [#28](https://github.com/jupyterhub/autodoc-traits/pull/28) ([@consideRatio](https://github.com/consideRatio))
+
+#### Maintenance and upkeep improvements
+
+- Add tests, add docstrings, and fix small bugs [#28](https://github.com/jupyterhub/autodoc-traits/pull/28) ([@consideRatio](https://github.com/consideRatio))
+- single file module [#25](https://github.com/jupyterhub/autodoc-traits/pull/25) ([@minrk](https://github.com/minrk))
+- maint: refactor **init**.py and add \_version.py, drop setup.py, require python 3.7+ [#21](https://github.com/jupyterhub/autodoc-traits/pull/21) ([@consideRatio](https://github.com/consideRatio))
+
+#### Documentation improvements
+
+- Add tests, add docstrings, and fix small bugs [#28](https://github.com/jupyterhub/autodoc-traits/pull/28) ([@consideRatio](https://github.com/consideRatio))
+- docs: add fixme note about unexpected inherited-members option [#16](https://github.com/jupyterhub/autodoc-traits/pull/16) ([@consideRatio](https://github.com/consideRatio))
+
+#### Continuous integration improvements
+
+- Bump pypa/gh-action-pypi-publish from 1.4.1 to 1.6.4 [#23](https://github.com/jupyterhub/autodoc-traits/pull/23) ([@dependabot](https://github.com/dependabot))
+- ci: add dependabot.yaml and update release workflow [#20](https://github.com/jupyterhub/autodoc-traits/pull/20) ([@consideRatio](https://github.com/consideRatio))
+
+#### Contributors to this release
+
+([GitHub contributors page for this release](https://github.com/jupyterhub/autodoc-traits/graphs/contributors?from=2022-12-06&to=2022-12-15&type=c))
+
+[@consideRatio](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3AconsideRatio+updated%3A2022-12-06..2022-12-15&type=Issues) | [@minrk](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Aminrk+updated%3A2022-12-06..2022-12-15&type=Issues)
+
 ### 1.0.0 - 2022-12-06
 
 Let's call it 1.0!
