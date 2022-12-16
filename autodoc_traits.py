@@ -5,6 +5,7 @@ The code here is similar to the official code example in
 https://www.sphinx-doc.org/en/master/development/tutorials/autodoc_ext.html#writing-the-extension.
 """
 from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
+from sphinx.util.inspect import safe_getattr
 from traitlets import MetaHasTraits, TraitType, Undefined
 
 # __version__ should be updated using tbump, based on configuration in
@@ -72,16 +73,7 @@ class ConfigurableDocumenter(ClassDocumenter):
         """
         check, members = super().get_object_members(want_all)
 
-        truthy_string = (
-            "A hack is used by autodoc_traits since 1.1.0 for trait "
-            "configurations, updating trait configuration's __doc__ to this "
-            "truthy string as required to make sphinx.ext.autodoc behave as "
-            " wanted."
-        )
-        for trait in self.object.class_traits(config=True).values():
-            trait.__doc__ = truthy_string
-
-        # We add all traits, also the inherited, bypassing :members: and
+        # We add all documented, _configurable_ traits, including inherited, bypassing :members: and
         # :inherit-members: options.
         #
         # FIXME: We have been adding the trait_members unconditionally, but
@@ -195,6 +187,20 @@ class TraitDocumenter(AttributeDocumenter):
         return super().get_doc()
 
 
+def hastraits_attrgetter(obj, name, *defargs):
+    """getattr for trait
+
+    Ensures when HasTraits are documented, their __doc__ attr is defined
+    as the .help string.
+    """
+    attr = safe_getattr(obj, name, *defargs)
+    if isinstance(attr, TraitType):
+        # ensure __doc__ is defined as the trait's help string
+        # if help is empty, that's the same as undocumented
+        attr.__doc__ = attr.help
+    return attr
+
+
 def setup(app):
     """
     The setup function is required for Sphinx extensions.
@@ -211,3 +217,4 @@ def setup(app):
     # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_autodocumenter
     app.add_autodocumenter(ConfigurableDocumenter)
     app.add_autodocumenter(TraitDocumenter)
+    app.add_autodoc_attrgetter(MetaHasTraits, hastraits_attrgetter)
