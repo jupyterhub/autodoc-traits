@@ -73,11 +73,15 @@ class ConfigurableDocumenter(ClassDocumenter):
         """
         check, members = super().get_object_members(want_all)
 
-        # We add all documented, _configurable_ traits, including inherited, bypassing :members: and
-        # :inherit-members: options.
+        # We add all _configurable_ traits, including inherited, even if they
+        # weren't included via :members: or :inherited-members: options.
         #
-        # FIXME: We have been adding the trait_members unconditionally, but
-        #        should we keep doing that?
+        # Being added at this stage doesn't mean they are presented. Any members
+        # added here must also have a truthy __doc__ string attribute and not be
+        # part of the :exclude-members: option.
+        #
+        # FIXME: We have been adding the configurable trait_members
+        #        unconditionally, but should we keep doing that?
         #
         #        See https://github.com/jupyterhub/autodoc-traits/issues/27
         #
@@ -169,23 +173,6 @@ class TraitDocumenter(AttributeDocumenter):
 
         super().add_directive_header(sig)
 
-    def get_doc(self):
-        """
-        get_doc (get docstring) is called by add_content, which is called by
-        generate. We override it to not unconditionally provide the docstring of
-        the traitlets type, but instead provide the traits help text if its
-        available.
-
-        Links to relevant source code in sphinx.ext.autodoc:
-        - Documenter.generate:             https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L918-L929
-        - AttributeDocumenter.add_content: https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L2655-L2663
-        - Documenter.add_content:          https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L568-L605
-        - AttributeDocumenter.get_doc:     https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L2639-L2653
-        """
-        if isinstance(self.object.help, str):
-            return [[self.object.help]]
-        return super().get_doc()
-
 
 def hastraits_attrgetter(obj, name, *defargs):
     """getattr for trait
@@ -197,7 +184,7 @@ def hastraits_attrgetter(obj, name, *defargs):
     if isinstance(attr, TraitType):
         # ensure __doc__ is defined as the trait's help string
         # if help is empty, that's the same as undocumented
-        attr.__doc__ = attr.help
+        attr.__doc__ = attr.help or "No help string is provided."
     return attr
 
 
@@ -217,4 +204,7 @@ def setup(app):
     # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_autodocumenter
     app.add_autodocumenter(ConfigurableDocumenter)
     app.add_autodocumenter(TraitDocumenter)
+
+    # add_autodoc_attrgetter reference:
+    # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_autodoc_attrgetter
     app.add_autodoc_attrgetter(MetaHasTraits, hastraits_attrgetter)
