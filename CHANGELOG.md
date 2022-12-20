@@ -2,7 +2,7 @@
 
 ## 1.0
 
-### 1.1.0 - 2022-12-15
+### 1.1.0 - 2022-12-20
 
 ([full changelog](https://github.com/jupyterhub/autodoc-traits/compare/1.0.0...1.1.0))
 
@@ -12,6 +12,7 @@
 
 #### Bugs fixed
 
+- register traits with a help string as documented for `autoclass` [#33](https://github.com/jupyterhub/autodoc-traits/pull/33) ([@minrk](https://github.com/minrk))
 - avoid putting `c.Class.trait` annotation on non-config traits [#32](https://github.com/jupyterhub/autodoc-traits/pull/32) ([@minrk](https://github.com/minrk))
 - Add tests, add docstrings, and fix small bugs [#28](https://github.com/jupyterhub/autodoc-traits/pull/28) ([@consideRatio](https://github.com/consideRatio))
 
@@ -19,7 +20,7 @@
 
 - Add tests, add docstrings, and fix small bugs [#28](https://github.com/jupyterhub/autodoc-traits/pull/28) ([@consideRatio](https://github.com/consideRatio))
 - single file module [#25](https://github.com/jupyterhub/autodoc-traits/pull/25) ([@minrk](https://github.com/minrk))
-- maint: refactor **init**.py and add \_version.py, drop setup.py, require python 3.7+ [#21](https://github.com/jupyterhub/autodoc-traits/pull/21) ([@consideRatio](https://github.com/consideRatio))
+- maint: refactor `__init__.py` and add \_version.py, drop setup.py, require python 3.7+ [#21](https://github.com/jupyterhub/autodoc-traits/pull/21) ([@consideRatio](https://github.com/consideRatio))
 
 #### Documentation improvements
 
@@ -33,9 +34,9 @@
 
 #### Contributors to this release
 
-([GitHub contributors page for this release](https://github.com/jupyterhub/autodoc-traits/graphs/contributors?from=2022-12-06&to=2022-12-15&type=c))
+([GitHub contributors page for this release](https://github.com/jupyterhub/autodoc-traits/graphs/contributors?from=2022-12-06&to=2022-12-20&type=c))
 
-[@consideRatio](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3AconsideRatio+updated%3A2022-12-06..2022-12-15&type=Issues) | [@minrk](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Aminrk+updated%3A2022-12-06..2022-12-15&type=Issues)
+[@consideRatio](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3AconsideRatio+updated%3A2022-12-06..2022-12-20&type=Issues) | [@minrk](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Aminrk+updated%3A2022-12-06..2022-12-20&type=Issues)
 
 ### 1.0.0 - 2022-12-06
 
