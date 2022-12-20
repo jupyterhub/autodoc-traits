@@ -4,7 +4,11 @@ sphinx.ext.autodoc extension for classes with configurable traits.
 The code here is similar to the official code example in
 https://www.sphinx-doc.org/en/master/development/tutorials/autodoc_ext.html#writing-the-extension.
 """
+
+import warnings
+
 from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
+from sphinx.util.inspect import safe_getattr
 from traitlets import MetaHasTraits, TraitType, Undefined
 
 # __version__ should be updated using tbump, based on configuration in
@@ -72,27 +76,45 @@ class ConfigurableDocumenter(ClassDocumenter):
         """
         check, members = super().get_object_members(want_all)
 
-        truthy_string = (
-            "A hack is used by autodoc_traits since 1.1.0 for trait "
-            "configurations, updating trait configuration's __doc__ to this "
-            "truthy string as required to make sphinx.ext.autodoc behave as "
-            " wanted."
-        )
-        for trait in self.object.class_traits(config=True).values():
-            trait.__doc__ = truthy_string
-
-        # We add all traits, also the inherited, bypassing :members: and
-        # :inherit-members: options.
+        # We add all _configurable_ traits, including inherited, even if they
+        # weren't included via :members: or :inherited-members: options.
         #
-        # FIXME: We have been adding the trait_members unconditionally, but
-        #        should we keep doing that?
+        # Being added at this stage doesn't mean they are presented. Any members
+        # added here must also have a truthy __doc__ string attribute and not be
+        # part of the :exclude-members: option.
+        #
+        # FIXME: We have been adding the configurable trait_members
+        #        unconditionally, but should we keep doing that?
         #
         #        See https://github.com/jupyterhub/autodoc-traits/issues/27
         #
-        trait_members = self.object.class_traits(config=True).items()
-        for trait in trait_members:
-            if trait not in members:
-                members.append(trait)
+        config_trait_members = self.object.class_traits(config=True).items()
+        for trait_tuple in config_trait_members:
+            name, trait = trait_tuple
+            if not trait.__doc__:
+                warnings.warn(
+                    f"""
+                    Documenting {self.object.__name__}.{trait.name} without a help string because it has config=True.
+
+                    Including undocumented config=True traits is deprecated in autodoc-traits 1.1.
+                    Add a help string:
+
+                        {trait.name} = {trait.__class__.__name__}(
+                            help="...",
+                        )
+
+                    to keep this trait in your docs,
+                    or include it explicitly via :members:
+                    """,
+                    FutureWarning,
+                )
+                # FIXME: in the unlikely event that the patched trait
+                # is documented multiple times in the same build,
+                # this patch will cause it to have a truthy help string
+                # elsewhere, not just in this autoconfigurable instance.
+                trait.__doc__ = trait.help = "No help string is provided."
+            if trait_tuple not in members:
+                members.append(trait_tuple)
 
         return check, members
 
@@ -159,7 +181,7 @@ class TraitDocumenter(AttributeDocumenter):
         - AttributeDocumenter.add_directive_header: https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L2592-L2620
         - Documenter.add_directive_header:          https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L504-L524
         """
-        default_value = self.object.get_default_value()
+        default_value = self.object.default_value
         if default_value is Undefined:
             default_value = ""
         else:
@@ -177,22 +199,21 @@ class TraitDocumenter(AttributeDocumenter):
 
         super().add_directive_header(sig)
 
-    def get_doc(self):
-        """
-        get_doc (get docstring) is called by add_content, which is called by
-        generate. We override it to not unconditionally provide the docstring of
-        the traitlets type, but instead provide the traits help text if its
-        available.
 
-        Links to relevant source code in sphinx.ext.autodoc:
-        - Documenter.generate:             https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L918-L929
-        - AttributeDocumenter.add_content: https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L2655-L2663
-        - Documenter.add_content:          https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L568-L605
-        - AttributeDocumenter.get_doc:     https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L2639-L2653
-        """
-        if isinstance(self.object.help, str):
-            return [[self.object.help]]
-        return super().get_doc()
+def hastraits_attrgetter(obj, name, *defargs):
+    """getattr for trait
+
+    Ensures when HasTraits are documented, their __doc__ attr is defined
+    as the .help string.
+
+    This backports a change in traitlets 5.8.0.
+    """
+    attr = safe_getattr(obj, name, *defargs)
+    if isinstance(attr, TraitType):
+        # ensure __doc__ is defined as the trait's help string
+        # if help is empty, that's the same as undocumented
+        attr.__doc__ = attr.help
+    return attr
 
 
 def setup(app):
@@ -211,3 +232,7 @@ def setup(app):
     # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_autodocumenter
     app.add_autodocumenter(ConfigurableDocumenter)
     app.add_autodocumenter(TraitDocumenter)
+
+    # add_autodoc_attrgetter reference:
+    # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_autodoc_attrgetter
+    app.add_autodoc_attrgetter(MetaHasTraits, hastraits_attrgetter)
