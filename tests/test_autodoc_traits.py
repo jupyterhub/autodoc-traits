@@ -24,10 +24,11 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
             "autoclass/members.rst",
             [
                 "c.SampleConfigurable.trait",
-                "c.SampleConfigurable.trait_nohelp",
                 "trait_noconfig",
             ],
-            [],
+            [
+                "c.SampleConfigurable.trait_nohelp",
+            ],
         ),
         (
             "autoclass/undoc_members.rst",
@@ -123,9 +124,10 @@ def test_sphinx_build_all_docs(temp_docs_dir, monkeypatch):
             "autotrait/nohelp.rst",
             [
                 "c.SampleConfigurable.trait_nohelp",
+            ],
+            [
                 "No help string is provided.",
             ],
-            [],
         ),
         ("autotrait/non_trait_raises_error.rst", [], []),
     ],

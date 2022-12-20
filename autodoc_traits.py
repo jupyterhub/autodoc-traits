@@ -4,6 +4,9 @@ sphinx.ext.autodoc extension for classes with configurable traits.
 The code here is similar to the official code example in
 https://www.sphinx-doc.org/en/master/development/tutorials/autodoc_ext.html#writing-the-extension.
 """
+
+import warnings
+
 from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
 from sphinx.util.inspect import safe_getattr
 from traitlets import MetaHasTraits, TraitType, Undefined
@@ -85,10 +88,33 @@ class ConfigurableDocumenter(ClassDocumenter):
         #
         #        See https://github.com/jupyterhub/autodoc-traits/issues/27
         #
-        trait_members = self.object.class_traits(config=True).items()
-        for trait in trait_members:
-            if trait not in members:
-                members.append(trait)
+        config_trait_members = self.object.class_traits(config=True).items()
+        for trait_tuple in config_trait_members:
+            name, trait = trait_tuple
+            if not trait.__doc__:
+                warnings.warn(
+                    f"""
+                    Documenting {self.object.__name__}.{trait.name} without a help string because it has config=True.
+
+                    Including undocumented config=True traits is deprecated in autodoc-traits 1.1.
+                    Add a help string:
+
+                        {trait.name} = {trait.__class__.__name__}(
+                            help="...",
+                        )
+
+                    to keep this trait in your docs,
+                    or include it explicitly via :members:
+                    """,
+                    FutureWarning,
+                )
+                # FIXME: in the unlikely event that the patched trait
+                # is documented multiple times in the same build,
+                # this patch will cause it to have a truthy help string
+                # elsewhere, not just in this autoconfigurable instance.
+                trait.__doc__ = trait.help = "No help string is provided."
+            if trait_tuple not in members:
+                members.append(trait_tuple)
 
         return check, members
 
@@ -155,7 +181,7 @@ class TraitDocumenter(AttributeDocumenter):
         - AttributeDocumenter.add_directive_header: https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L2592-L2620
         - Documenter.add_directive_header:          https://github.com/sphinx-doc/sphinx/blob/v6.0.0b2/sphinx/ext/autodoc/__init__.py#L504-L524
         """
-        default_value = self.object.get_default_value()
+        default_value = self.object.default_value
         if default_value is Undefined:
             default_value = ""
         else:
@@ -179,12 +205,14 @@ def hastraits_attrgetter(obj, name, *defargs):
 
     Ensures when HasTraits are documented, their __doc__ attr is defined
     as the .help string.
+
+    This backports a change in traitlets 5.8.0.
     """
     attr = safe_getattr(obj, name, *defargs)
     if isinstance(attr, TraitType):
         # ensure __doc__ is defined as the trait's help string
         # if help is empty, that's the same as undocumented
-        attr.__doc__ = attr.help or "No help string is provided."
+        attr.__doc__ = attr.help
     return attr
 
 
