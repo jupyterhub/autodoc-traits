@@ -20,7 +20,7 @@
 
 - Add tests, add docstrings, and fix small bugs [#28](https://github.com/jupyterhub/autodoc-traits/pull/28) ([@consideRatio](https://github.com/consideRatio))
 - single file module [#25](https://github.com/jupyterhub/autodoc-traits/pull/25) ([@minrk](https://github.com/minrk))
-- maint: refactor `__init__.py` and add _version.py, drop setup.py, require python 3.7+ [#21](https://github.com/jupyterhub/autodoc-traits/pull/21) ([@consideRatio](https://github.com/consideRatio))
+- maint: refactor `__init__.py` and add \_version.py, drop setup.py, require python 3.7+ [#21](https://github.com/jupyterhub/autodoc-traits/pull/21) ([@consideRatio](https://github.com/consideRatio))
 
 #### Documentation improvements
 
