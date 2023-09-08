@@ -7,7 +7,7 @@ https://www.sphinx-doc.org/en/master/development/tutorials/autodoc_ext.html#writ
 
 import warnings
 
-from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
+from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter, ObjectMember
 from sphinx.util.inspect import safe_getattr
 from traitlets import MetaHasTraits, TraitType, Undefined
 
@@ -75,6 +75,7 @@ class ConfigurableDocumenter(ClassDocumenter):
         - traitlets.HasTraits.class_traits:   https://github.com/ipython/traitlets/blob/v5.6.0/traitlets/traitlets.py#L1620-L1652
         """
         check, members = super().get_object_members(want_all)
+        existing_member_names = {m.__name__ for m in members}
 
         # We add all _configurable_ traits, including inherited, even if they
         # weren't included via :members: or :inherited-members: options.
@@ -113,8 +114,10 @@ class ConfigurableDocumenter(ClassDocumenter):
                 # this patch will cause it to have a truthy help string
                 # elsewhere, not just in this autoconfigurable instance.
                 trait.__doc__ = trait.help = "No help string is provided."
-            if trait_tuple not in members:
-                members.append(trait_tuple)
+            if name not in existing_member_names:
+                existing_member_names.add(name)
+
+                members.append(ObjectMember(name, trait))
 
         return check, members
 
