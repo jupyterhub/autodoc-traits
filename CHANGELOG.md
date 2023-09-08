@@ -1,6 +1,27 @@
 # Changes in autodoc-traits
 
-## 1.0
+## 1.2
+
+### 1.2.0 - 2023-09-08
+
+1.2.0 fixes compatibility with sphinx 7.2 and increases the minimum required sphinx version from 2 to 4.
+
+([full changelog](https://github.com/jupyterhub/autodoc-traits/compare/1.1.0...1.2.0))
+
+#### Bugs fixed
+
+- sphinx 7.2 compatibility, require sphinx 4 [#52](https://github.com/jupyterhub/autodoc-traits/pull/52) ([@minrk](https://github.com/minrk), [@manics](https://github.com/manics), [@consideRatio](https://github.com/consideRatio))
+
+#### Contributors to this release
+
+The following people contributed discussions, new ideas, code and documentation contributions, and review.
+See [our definition of contributors](https://github-activity.readthedocs.io/en/latest/#how-does-this-tool-define-contributions-in-the-reports).
+
+([GitHub contributors page for this release](https://github.com/jupyterhub/autodoc-traits/graphs/contributors?from=2022-12-20&to=2023-09-08&type=c))
+
+@consideRatio ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3AconsideRatio+updated%3A2022-12-20..2023-09-08&type=Issues)) | @manics ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Amanics+updated%3A2022-12-20..2023-09-08&type=Issues)) | @minrk ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Aminrk+updated%3A2022-12-20..2023-09-08&type=Issues))
+
+## 1.1
 
 ### 1.1.0 - 2022-12-20
 
@@ -37,6 +58,8 @@
 ([GitHub contributors page for this release](https://github.com/jupyterhub/autodoc-traits/graphs/contributors?from=2022-12-06&to=2022-12-20&type=c))
 
 [@consideRatio](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3AconsideRatio+updated%3A2022-12-06..2022-12-20&type=Issues) | [@minrk](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Aminrk+updated%3A2022-12-06..2022-12-20&type=Issues)
+
+## 1.0
 
 ### 1.0.0 - 2022-12-06
 
