@@ -19,7 +19,7 @@ license = {file = "LICENSE"}
 dynamic = ["version"]
 requires-python = ">=3.7"
 dependencies = [
-    "sphinx>=2",
+    "sphinx>=4",
     "traitlets>=4",
 ]
 
