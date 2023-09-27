@@ -20,7 +20,9 @@ dynamic = ["version"]
 requires-python = ">=3.7"
 dependencies = [
     "sphinx>=4",
-    "traitlets>=4",
+    # FIXME: traitlets are upper bounded as a workaround to
+    #        https://github.com/jupyterhub/autodoc-traits/issues/55
+    "traitlets>=4,<5.10",
 ]
 
 [project.optional-dependencies]
