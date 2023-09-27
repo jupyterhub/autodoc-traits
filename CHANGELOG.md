@@ -2,6 +2,14 @@
 
 ## 1.2
 
+### 1.2.1 - 2023-09-27
+
+([full changelog](https://github.com/jupyterhub/autodoc-traits/compare/1.2.0...1.2.1))
+
+#### Maintenance and upkeep improvements
+
+- Bound `traitlets<5.10` and add test for issue observed in newer versions [#54](https://github.com/jupyterhub/autodoc-traits/pull/54) ([@consideRatio](https://github.com/consideRatio), [@manics](https://github.com/manics))
+
 ### 1.2.0 - 2023-09-08
 
 1.2.0 fixes compatibility with sphinx 7.2 and increases the minimum required sphinx version from 2 to 4.
