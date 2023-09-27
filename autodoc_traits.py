@@ -14,7 +14,7 @@ from traitlets import MetaHasTraits, TraitType, Undefined
 # __version__ should be updated using tbump, based on configuration in
 # pyproject.toml, according to instructions in RELEASE.md.
 #
-__version__ = "1.2.1"
+__version__ = "1.2.2.dev"
 
 
 class ConfigurableDocumenter(ClassDocumenter):
