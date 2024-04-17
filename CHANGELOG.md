@@ -2,6 +2,19 @@
 
 ## 1.2
 
+### 1.2.2 - 2024-04-17
+
+([full changelog](https://github.com/jupyterhub/autodoc-traits/compare/1.2.1...1.2.2))
+
+#### Maintenance and upkeep improvements
+
+- Remove no longer needed upper bound pin on traitlets [#64](https://github.com/jupyterhub/autodoc-traits/pull/64) ([@consideRatio](https://github.com/consideRatio))
+
+#### Continuous integration improvements
+
+- build(deps): bump actions/setup-python from 4 to 5 [#61](https://github.com/jupyterhub/autodoc-traits/pull/61) ([@consideRatio](https://github.com/consideRatio))
+- build(deps): bump actions/checkout from 3 to 4 [#57](https://github.com/jupyterhub/autodoc-traits/pull/57) ([@consideRatio](https://github.com/consideRatio))
+
 ### 1.2.1 - 2023-09-27
 
 ([full changelog](https://github.com/jupyterhub/autodoc-traits/compare/1.2.0...1.2.1))
