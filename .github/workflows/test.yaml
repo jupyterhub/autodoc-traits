@@ -29,18 +29,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # NOTE: jinja2<3.1 is added as a workaround to ensure we can test
-          #       against sphinx 2 and 3 that otherwise breaks, see
-          #       https://github.com/sphinx-doc/sphinx/issues/10291#issuecomment-1079709635.
-          #
           - python-version: "3.8"
             sphinx-version: "4.*"
             traitlets-version: "4.*"
-            pip-install-addition: "'jinja2<3.1'"
+            pip-install-addition: ""
           - python-version: "3.9"
             sphinx-version: "5.*"
             traitlets-version: "4.*"
-            pip-install-addition: "'jinja2<3.1'"
+            pip-install-addition: ""
           - python-version: "3.10"
             sphinx-version: "6.*"
             traitlets-version: "5.*"
