@@ -45,6 +45,10 @@ jobs:
             sphinx-version: "7.*"
             traitlets-version: "5.*"
             pip-install-addition: ""
+          - python-version: "3.12"
+            sphinx-version: "7.*"
+            traitlets-version: "5.*"
+            pip-install-addition: ""
 
     steps:
       - uses: actions/checkout@v4
