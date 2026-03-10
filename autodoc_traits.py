@@ -229,6 +229,8 @@ def setup(app):
     """
     # setup_extension reference:
     # https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.setup_extension
+    # temporary compatibility for sphinx 9:
+    app.config.autodoc_use_legacy_class_based = True
     app.setup_extension("sphinx.ext.autodoc")
 
     # add_autodocumenter reference:
