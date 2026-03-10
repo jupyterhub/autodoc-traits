@@ -17,9 +17,9 @@ classifiers = [
 readme = "README.md"
 license = {file = "LICENSE"}
 dynamic = ["version"]
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 dependencies = [
-    "sphinx>=4",
+    "sphinx>=6",
     "traitlets>=4",
 ]
 
