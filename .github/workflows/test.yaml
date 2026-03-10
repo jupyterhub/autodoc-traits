@@ -40,10 +40,8 @@ jobs:
             traitlets-version: "5.*"
           - python-version: "3.13"
             sphinx-version: "9.*"
-            traitlets-version: "5.*"
+            traitlets-version: ""
           - python-version: "3.14"
-            sphinx-version: "*"
-            traitlets-version: "*"
 
     steps:
       - uses: actions/checkout@v6
@@ -51,6 +49,16 @@ jobs:
         with:
           python-version: "${{ matrix.python-version }}"
 
-      - run: pip install ".[test]" "sphinx==${{ matrix.sphinx-version }}" "traitlets==${{ matrix.traitlets-version }}" ${{ matrix.pip-install-addition }}
+      - name: create constraints
+        run: |
+          touch constraints.txt
+          if [[ ! -z "${{ matrix.sphinx-version }}" ]]; then
+            echo "sphinx==${{ matrix.sphinx-version }}" >> constraints.txt
+          fi
+          if [[ ! -z "${{ matrix.traitlets-version }}" ]]; then
+            echo "traitlets==${{ matrix.traitlets-version }}" >> constraints.txt
+          fi
+
+      - run: pip install ".[test]" --constraint ./constraints.txt ${{ matrix.pip-install-addition }}
 
       - run: pytest
