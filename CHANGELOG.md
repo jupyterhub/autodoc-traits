@@ -1,5 +1,27 @@
 # Changes in autodoc-traits
 
+## 1.3
+
+### 1.3.0 - 2026-03-10
+
+1.3.0 fixes compatibility with sphinx 9.
+1.3.0 drops support for Sphinx < 6 and Python < 3.10.
+
+([full changelog](https://github.com/jupyterhub/autodoc-traits/compare/1.2.2...1.3.0))
+
+#### Bugs fixed
+
+- fix compatibility with sphinx 9, require Python 3.10, sphinx 6 [#79](https://github.com/jupyterhub/autodoc-traits/pull/79) ([@minrk](https://github.com/minrk))
+
+#### Contributors to this release
+
+The following people contributed discussions, new ideas, code and documentation contributions, and review.
+See [our definition of contributors](https://github-activity.readthedocs.io/en/latest/use/#how-does-this-tool-define-contributions-in-the-reports).
+
+([GitHub contributors page for this release](https://github.com/jupyterhub/autodoc-traits/graphs/contributors?from=2024-04-17&to=2026-03-10&type=c))
+
+@consideRatio ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3AconsideRatio+updated%3A2024-04-17..2026-03-10&type=Issues)) | @minrk ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Aminrk+updated%3A2024-04-17..2026-03-10&type=Issues)) | @yuvipanda ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fautodoc-traits+involves%3Ayuvipanda+updated%3A2024-04-17..2026-03-10&type=Issues))
+
 ## 1.2
 
 ### 1.2.2 - 2024-04-17
