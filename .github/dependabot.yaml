@@ -10,7 +10,9 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     labels: [ci]
+    groups:
+      actions:
+        patterns:
+          - "*"
     schedule:
       interval: monthly
-      time: "05:00"
-      timezone: Etc/UTC
